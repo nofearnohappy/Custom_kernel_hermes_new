@@ -101,8 +101,7 @@ static inline void board_gpio_init(const struct mxt_platform_data *pdata)
 	mt_set_gpio_out(GPIO_CTP_RST_PIN, GPIO_OUT_ZERO);
 	msleep(10);
 printk("*****sunwf111111 func = %s line = %d ******\n",__func__,__LINE__);
-	hwPowerOn(MT6328_POWER_LDO_VGP1, VOL_3300, "TP"); //MT6323_POWER_LDO_VGP1/************sunwf modify about power************/
-	//hwPowerOn(MT6328_POWER_LDO_VGP2, VOL_1800, "TP"); //MT6323_POWER_LDO_VGP1/************sunwf modify about power******************/
+	hwPowerOn(MT6331_POWER_LDO_VGP1, VOL_3300, "TP");
 	msleep(50);
 	mt_set_gpio_out(GPIO_CTP_RST_PIN, GPIO_OUT_ONE);
 #if 0
@@ -112,7 +111,7 @@ printk("*****sunwf111111 func = %s line = %d ******\n",__func__,__LINE__);
 	mt_set_gpio_out(GPIO_CTP_RST_PIN, GPIO_OUT_ONE);
 	//printk("%s:reset-gpio:%d\n",__func__, mt_get_gpio_out(GPIO_CTP_RST_PIN));
 #endif
-	msleep(200);
+	msleep(250);
 #endif
 
 #if defined(CONFIG_MXT_PLATFORM_QUALCOMM)

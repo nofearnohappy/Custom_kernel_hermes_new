@@ -217,6 +217,7 @@ extern LCM_DRIVER nt35596_auo55_boyi_fhd_lcm_drv;
  */
 extern LCM_DRIVER nt35695_auo52_truly_fhd_lcm_drv;
 extern LCM_DRIVER nt35596_fhd_tianma_phantom_lcm_drv;
+extern LCM_DRIVER nt35596_fhd_auo_phantom_lcm_drv;
 // End of Vanzo:wangfei
 LCM_DRIVER* lcm_driver_list[] = 
 {
@@ -233,6 +234,9 @@ LCM_DRIVER* lcm_driver_list[] =
  */
 #if defined(NT35596_FHD_TIANMA_PHANTOM)
 	&nt35596_fhd_tianma_phantom_lcm_drv,
+#endif
+#if defined(NT35596_FHD_AUO_PHANTOM)
+	&nt35596_fhd_auo_phantom_lcm_drv,
 #endif
 #if defined(NT35695_AUO52_TRULY_FHD)
     &nt35695_auo52_truly_fhd_lcm_drv,
@@ -977,12 +981,11 @@ LCM_DRIVER* lcm_driver_list[] =
 
 unsigned int lcm_count = sizeof(lcm_driver_list)/sizeof(LCM_DRIVER*);
 LCM_COMPILE_ASSERT(0 != sizeof(lcm_driver_list)/sizeof(LCM_DRIVER*));
-#if defined(NT35520_HD720_DSI_CMD_TM) | defined(NT35520_HD720_DSI_CMD_BOE) | defined(NT35521_HD720_DSI_VDO_BOE) | defined(NT35521_HD720_DSI_VIDEO_TM)
+#if defined(NT35520_HD720_DSI_CMD_TM) | defined(NT35520_HD720_DSI_CMD_BOE) | defined(NT35521_HD720_DSI_VDO_BOE) | defined(NT35521_HD720_DSI_VIDEO_TM) | defined(NT35596_FHD_TIANMA_PHANTOM) | defined(NT35596_FHD_AUO_PHANTOM) | defined(NT35596_FHD_BOE_PHANTOM)
 #ifdef BUILD_LK
 extern void mdelay(unsigned long msec);
 #endif
 static unsigned char lcd_id_pins_value = 0xFF;
-
 
 /******************************************************************************
 Function:       which_lcd_module_triple

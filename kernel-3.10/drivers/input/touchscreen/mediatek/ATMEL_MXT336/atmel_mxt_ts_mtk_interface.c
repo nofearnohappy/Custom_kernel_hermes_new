@@ -1,7 +1,6 @@
-
 const static unsigned int mxts_keys[NUM_KEY_TYPE][MAX_KEYS_SUPPORTED_IN_DRIVER] = {
 	//T15_T97_KEY
-	{KEY_APP_SWITCH,KEY_HOMEPAGE,KEY_BACK,KEY_WAKEUP,KEY_POWER},
+	{KEY_BACK,KEY_HOMEPAGE,KEY_MENU},
 	//T19_KEY,
 	{KEY_POWER},
 	//T24_KEY,
@@ -13,7 +12,7 @@ const static unsigned int mxts_keys[NUM_KEY_TYPE][MAX_KEYS_SUPPORTED_IN_DRIVER] 
 	//T92_KEY,
 	{KEY_F8,KEY_F9,KEY_F10,KEY_F11},
 	//T93_KEY,
-	{KEY_POWER}, //{KEY_F9}, //swf 20150526 add for double click screen on
+	{KEY_F9},
 	//T99_KEY,
 	{KEY_F10},
 	//T115_KEY,
@@ -174,7 +173,7 @@ static int __init tpd_driver_init(void)
 {
 	printk("mxt tpd_driver_init\n");
  
-	i2c_register_board_info(1, &mxt_i2c_tpd, 1);
+	i2c_register_board_info(2, &mxt_i2c_tpd, 1);
 	
 	if(tpd_driver_add(&tpd_device_driver) < 0)
 		printk("tpd_driver_init failed\n");

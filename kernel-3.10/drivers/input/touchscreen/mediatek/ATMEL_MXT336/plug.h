@@ -8,7 +8,7 @@
 
 #include "atomic_op.h"
 
-#define CONFIG_TP_DEVICE_INFO_SUPORT  /*LC swf add 20150424 for tp device information*/
+//#define CONFIG_TP_DEVICE_INFO_SUPORT  /*LC swf add 20150424 for tp device information*/
 #define CONFIG_ESD_CHECK_A_REGISTER     //swf add for esd check function
 //#define CONFIG_MXT_CAL_T37_WORKAROUND     //swf delete
 #define CONFIG_MXT_PROCI_PI_WORKAROUND  //swf66 add for double click screen on

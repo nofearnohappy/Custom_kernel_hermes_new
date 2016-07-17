@@ -81,7 +81,7 @@ static int global_brightnest_level = 0;
  * Define
  *****************************************************************************/
 
-static const unsigned char LCD_MODULE_ID = 0x02;
+static const unsigned char LCD_MODULE_ID = 0x00;
 // ---------------------------------------------------------------------------
 //  Local Constants
 // ---------------------------------------------------------------------------
@@ -92,7 +92,6 @@ static const unsigned char LCD_MODULE_ID = 0x02;
 
 #define REGFLAG_DELAY			 0xFC
 #define REGFLAG_END_OF_TABLE		 0xFD   // END OF REGISTERS MARKER
-
 
 #ifndef TRUE
 #define TRUE 1
@@ -133,7 +132,6 @@ static struct LCM_setting_table lcm_backlight_enable[] = {
 };
 
 
-
 static struct LCM_setting_table lcm_suspend_setting[] = {
     {0x51, 1, {0x00}},
     {0x28, 0, {}},
@@ -144,59 +142,59 @@ static struct LCM_setting_table lcm_suspend_setting[] = {
 };
 
 static struct LCM_setting_table lcm_initialization_setting[] = {
-    {0xFF, 1, {0xEE}},
-    {0xFB, 1, {0x01}},
-    {0x18, 1, {0x40}},
-    {REGFLAG_DELAY, 10, {}},
-    {0x18, 1, {0x00}},
-    {REGFLAG_DELAY, 20, {}},
-    {0x7C, 1, {0x31}},
-    {0xFF, 1, {0x05}},
-    {0xFB, 1, {0x01}},
-    {0xE7, 1, {0x00}},
-    {0xFF, 1, {0x04}},
-    {0xFB, 1, {0x01}},
-    {0x08, 1, {0x06}},
-    {0xFF, 1, {0x00}},
-    {0xFB, 1, {0x01}},
-    {0xD3, 1, {0x06}},
-    {0xD4, 1, {0x04}},
-    {0x51, 1, {0x06}},
-    {0x53, 1, {0x24}},
-    {0x55, 1, {0x00}},
-    {0x11, 0, {}},
-    {REGFLAG_DELAY, 120, {}},
-    {0x29, 0, {}},
-    {REGFLAG_DELAY, 20, {}},
-    {REGFLAG_END_OF_TABLE, 0,{}},
+    { 0xFF, 1, {0xEE}},
+    { 0xFB, 1, {0x01}},
+    { 0x18, 1, {0x40}},
+    { REGFLAG_DELAY, 10, {}},
+    { 0x18, 1, {0x00}},
+    { REGFLAG_DELAY, 20, {}},
+    { 0x7C, 1, {0x31}},
+    { 0xFF, 1, {0x05}},
+    { 0xFB, 1, {0x01}},
+    { 0xE7, 1, {0x00}},
+    { 0xFF, 1, {0x04}},
+    { 0xFB, 1, {0x01}},
+    { 0x08, 1, {0x06}},
+    { 0xFF, 1, {0x00}},
+    { 0xFB, 1, {0x01}},
+    { 0x51, 1, {0x20}},
+    { 0x53, 1, {0x24}},
+    { 0x55, 1, {0x00}},
+    { 0xD3, 1, {0x06}},
+    { 0xD4, 1, {0x16}},
+    { 0x11, 0, {}},
+    { REGFLAG_DELAY, 120, {}},
+    { 0x29, 0, {}},
+    { REGFLAG_DELAY, 20, {}},
+    { REGFLAG_END_OF_TABLE, 0, {}}
 };
 
 static struct LCM_setting_table lcm_resume_setting[] = {
-    {0xFF, 1, {0xEE}},
-    {0xFB, 1, {0x01}},
-    {0x18, 1, {0x40}},
-    {REGFLAG_DELAY, 10, {}},
-    {0x18, 1, {0x00}},
-    {REGFLAG_DELAY, 20, {}},
-    {0x7C, 1, {0x31}},
-    {0xFF, 1, {0x05}},
-    {0xFB, 1, {0x01}},
-    {0xE7, 1, {0x00}},
-    {0xFF, 1, {0x04}},
-    {0xFB, 1, {0x01}},
-    {0x08, 1, {0x06}},
-    {0xFF, 1, {0x00}},
-    {0xFB, 1, {0x01}},
-    {0xD3, 1, {0x06}},
-    {0xD4, 1, {0x04}},
-    {0x51, 1, {0x06}},
-    {0x53, 1, {0x24}},
-    {0x55, 1, {0x01}},
-    {0x11, 0, {}},
-    {REGFLAG_DELAY, 120, {}},
-    {0x29, 0, {}},
-    {REGFLAG_DELAY, 20, {}},
-    {REGFLAG_END_OF_TABLE, 0x00, {}}
+    { 0xFF, 1, {0xEE}},
+    { 0xFB, 1, {0x01}},
+    { 0x18, 1, {0x40}},
+    { REGFLAG_DELAY, 10, {}},
+    { 0x18, 1, {0x00}},
+    { REGFLAG_DELAY, 20, {}},
+    { 0x7C, 1, {0x31}},
+    { 0xFF, 1, {0x05}},
+    { 0xFB, 1, {0x01}},
+    { 0xE7, 1, {0x00}},
+    { 0xFF, 1, {0x04}},
+    { 0xFB, 1, {0x01}},
+    { 0x08, 1, {0x06}},
+    { 0xFF, 1, {0x00}},
+    { 0xFB, 1, {0x01}},
+    { 0x51, 1, {0x20}},
+    { 0x53, 1, {0x24}},
+    { 0x55, 1, {0x01}},
+    { 0xD3, 1, {0x06}},
+    { 0xD4, 1, {0x16}},
+    { 0x11, 0, {}},
+    { REGFLAG_DELAY, 120, {}},
+    { 0x29, 0, {}},
+    { REGFLAG_DELAY, 20, {}},
+    { REGFLAG_END_OF_TABLE, 0, {}}
 };
 
 static void push_table(struct LCM_setting_table *table, unsigned int count, unsigned char force_update)
@@ -294,14 +292,14 @@ static void lcm_get_params(LCM_PARAMS *params)
 {
     memset(params, 0, sizeof(LCM_PARAMS));
     
-    params->disp_vendor1 = "tianma";
-    params->disp_vendor2 = "tianma";
+    params->disp_vendor1 = "auo";
+    params->disp_vendor2 = "auo";
     params->disp_class = "nt35596";
     params->sres = "1080*1920";
-
+    
     params->dsi.LANE_NUM = 4;
     params->dsi.vertical_backporch = 4;
-    params->dsi.vertical_frontporch = 4;
+    params->dsi.vertical_frontporch = 22;
     params->dsi.horizontal_sync_active = 4;
     params->physical_width = 68;
     params->physical_height = 121;
@@ -325,8 +323,8 @@ static void lcm_get_params(LCM_PARAMS *params)
     params->dsi.esd_check_enable = 1;
     params->dsi.customization_esd_check_enable = 1;
     params->dsi.lcm_esd_check_table[0].count = 1;
-    params->dsi.horizontal_backporch = 76;
-    params->dsi.horizontal_frontporch = 76;
+    params->dsi.horizontal_backporch = 72;
+    params->dsi.horizontal_frontporch = 72;
     
 }
 
@@ -514,18 +512,18 @@ static void lcm_cabc_enable_cmdq(unsigned int mode)
 
 
 
-LCM_DRIVER nt35596_fhd_tianma_phantom_lcm_drv=
+LCM_DRIVER nt35596_fhd_auo_phantom_lcm_drv=
 {
-    .name           	= "nt35596_fhd_tianma_phantom",
+    .name           	= "nt35596_fhd_auo_phantom",
     .set_util_funcs 	= lcm_set_util_funcs,
     .get_params     	= lcm_get_params,
-    .init           	= lcm_init,/*tianma init fun.*/
+    .init           	= lcm_init,
     .suspend        	= lcm_suspend,
     .resume         	= lcm_resume,
     .compare_id     	= lcm_compare_id,
     .set_backlight_cmdq	= lcm_setbacklight_cmdq,
     #ifndef BUILD_LK
-    .set_pwm			= lcm_cabc_enable_cmdq,
+    .set_pwm		= lcm_cabc_enable_cmdq,
     #endif
     
 };

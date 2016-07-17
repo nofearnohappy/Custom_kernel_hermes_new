@@ -146,7 +146,9 @@ static u8 suspend_flag = 0;
 static write_data_to_read(struct mxt_data *data); 
 #endif
 
+#if defined(CONFIG_TP_DEVICE_INFO_SUPORT)
 static void tp_devinfo_init(struct mxt_data *data);
+#endif
 static int mxt_update_file_name(struct device *dev, char **file_name,const char *buf, size_t count, int alternative);
 
 /* Object types */
@@ -1764,10 +1766,10 @@ LCSH_DEBUG("swf55 esd_check_function \n ");
                           if ((retval2 != 0) && ((read_data[1] != 0xae)||(read_data[5] != 0xae)))   //a->61 b->62 c->63  d->64
                          {
 				printk("mxt swf5555cccc TP esd error,reset TP\n");
-				hwPowerDown(MT6328_POWER_LDO_VGP1, "TP");
+				hwPowerDown(MT6331_POWER_LDO_VGP1, "TP");
 				mt_set_gpio_out(GPIO_CTP_RST_PIN, GPIO_OUT_ZERO);
 				msleep(10);
-				hwPowerOn(MT6328_POWER_LDO_VGP1, VOL_3300, "TP"); 	
+				hwPowerOn(MT6331_POWER_LDO_VGP1, VOL_3300, "TP");
 				msleep(50);
 				mt_set_gpio_out(GPIO_CTP_RST_PIN, GPIO_OUT_ONE);
 				msleep(200);
@@ -4454,7 +4456,9 @@ static ssize_t mxt_devcfg_crc_show(struct device *dev,struct device_attribute *a
 //	if (ret)
 //		return ret;
 
+#if defined(CONFIG_TP_DEVICE_INFO_SUPORT)
 	tp_devinfo_init(data);/*lch swf 20150608 add for tp devifo*/
+#endif
 	return scnprintf(buf, PAGE_SIZE, "0x%06X,%s\n",
 			 data->config_crc,data->cfg_name);	
 }
@@ -5706,6 +5710,29 @@ static write_data_to_read(struct mxt_data *data)  //swfesd
            LCSH_DEBUG("swf55 atmel write reg error\n");
 }
 #endif
+static u32 version=0;
+
+static int ctp_proc_open_show (struct seq_file* m, void* data)
+{
+    char temp[30] = {0};
+    int cnt = 0;
+
+    cnt = sprintf(temp, "pid:0x%06X\n",version);
+    seq_printf(m, "%s\n", temp);
+    return 0;
+
+}
+
+static ctp_proc_open (struct inode* inode, struct file* file)
+{
+    return single_open(file, ctp_proc_open_show, inode->i_private);
+}
+
+
+static const struct file_operations tp_info_fops = {
+    .open = ctp_proc_open,
+    .read = seq_read,
+};
 
 /************************lc swf 20150424 add start for tp devinfo************************/
 #if defined(CONFIG_TP_DEVICE_INFO_SUPORT)
@@ -5756,6 +5783,7 @@ static const struct file_operations ctp_vender_fops = {
 };
 #endif
 //LC--zbl--add--20150520 for  kernel3.1 proc node end
+
 static void tp_devinfo_init(struct mxt_data *data)
 {
 	static char crc_info[50];//={0};
@@ -5783,6 +5811,7 @@ static void tp_devinfo_init(struct mxt_data *data)
 	}
 }
 #endif
+
 
 /************************swf add start for tp devinfo ************************/
 
@@ -5881,6 +5910,12 @@ LCSH_DEBUG("*****sunwf111111 func = %s line = %d ******\n",__func__,__LINE__);
 	error = mxt_initialize(data);
 	if (error)
 		goto err_free_irq;
+
+	if(proc_create("tp_info", 0644, NULL, &tp_info_fops) == NULL)
+	{
+                printk("create_proc_entry  failed\n");
+		return -1;
+        }
 
 	error = sysfs_create_group(&client->dev.kobj, &mxt_attr_group);
 	if (error) {
