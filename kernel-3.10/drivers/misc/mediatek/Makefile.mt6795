@@ -11,6 +11,8 @@ obj-$(CONFIG_MTK_NFC) += nfc/
 obj-$(CONFIG_ZRAM)	+= mlog/
 
 obj-y	+= lcm/
+obj-$(CONFIG_RGK_DRIVER_FG_CW2015) += battery_fual/
+obj-$(CONFIG_MTK_IRTX_SUPPORT) += consumerir/
 obj-y	+= mach/
 
 obj-y	+= aee/
@@ -97,7 +99,6 @@ obj-y	+= ssw/
 endif
 endif
 
-obj-$(CONFIG_MTK_IRTX_SUPPORT) += irtx/
 # obj-$(CONFIG_MTK_SOUND) += smartpa/
 obj-$(CONFIG_MTK_SOUND)	+= sound/
 obj-$(CONFIG_MTK_BTCVSD) += btcvsd/
