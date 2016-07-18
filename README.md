@@ -20,15 +20,19 @@ Works in rom(tested 7.0.8.0) and recovery
 	* Accel
 	* Mag
 	* Giro
-	* Battery 3000mah(sw battery driver)
 	* OTG
 	* SOUND(Speaker,Headphones)
 	* Vibrator
-	* Fix Sleep 
+	* Fix Sleep
+	* Touch atmel
+        * LCM nt35596_auo
+	* Battery 3000mah(stock table)
+
 
 * Don't work:
-	* LCM (nt35532_boe, nt35596_auo)
-	* Touch(atmel)
+	* LCM (nt35532_boe)
+        * Leds(bugs) 
+        * Gpu (bugs weekly MIUI libsrv_init.so) 
 	* Imgsensor(all img sensors)
 	* Lens
 	* CW2015 (hw battery driver)
@@ -72,3 +76,8 @@ make -C kernel-3.10 O=$TOP/KERNEL_OBJ ROOTDIR=$TOP
 
 * I2C4
 	* CW2015 		(0062)
+
+# AUTORS
+* nofearnohappy
+* LazyC0DEr
+* Anomalchik
